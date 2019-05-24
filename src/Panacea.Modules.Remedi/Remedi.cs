@@ -101,7 +101,23 @@ namespace Panacea.Modules.Remedi
 
         static Remedi()
         {
-            LoadLibrary(CurrentPath + (Environment.Is64BitProcess ? "\\handSetApi\\x64\\HandSetAPI.dll" : "\\handSetApi\\x86\\HandSetAPI.dll"));
+            string path;
+            switch (IntPtr.Size)
+            {
+                case 4:
+                    path = "x86";
+                    break;
+                case 8:
+                    path = "x64";
+                    break;
+                default:
+                    throw new Exception("Unsupported architecture");
+            }
+            LoadLibrary(Path.Combine(
+                CurrentPath,
+                "HandsetAPI",
+                path,
+                "HandSetAPI.dll"));
         }
 
         [DllImport("kernel32.dll")]
