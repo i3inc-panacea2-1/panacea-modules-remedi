@@ -17,7 +17,7 @@ using Panacea.Core;
 
 namespace Panacea.Modules.Remedi
 {
-    public class Remedi : IHardwareManager
+    internal class Remedi : IHardwareManager
     {
         #region imports
         [DllImport("HandSetAPI", CallingConvention = CallingConvention.Cdecl)]
@@ -82,7 +82,7 @@ namespace Panacea.Modules.Remedi
         private Timer _ScannerTimer;
         private Timer _microphoneTimer;
 
-        public Remedi(ILogger logger)
+        internal Remedi(ILogger logger)
         {
             _logger = logger;
             _ScannerTimer = new Timer(30000);

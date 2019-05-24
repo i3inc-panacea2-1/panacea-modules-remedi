@@ -10,8 +10,9 @@ namespace Panacea.Modules.Remedi
 {
     public class RemediPlugin : IHardwarePlugin
     {
-        Remedi _manager;
-        static object _lock = new object();
+        // only one instance even if multiple plugin instances
+        static Remedi _manager;
+        static readonly object _lock = new object();
         private readonly PanaceaServices _core;
 
         public RemediPlugin(PanaceaServices core)
