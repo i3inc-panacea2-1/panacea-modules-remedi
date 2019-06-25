@@ -188,13 +188,10 @@ namespace Panacea.Modules.Remedi
             _window.Message += _window_Message;
             UsbNotification.RegisterUsbDeviceNotification(_window.Handle);
 
-            var tries = 0;
-            while (!(bool)ExecuteSync(() => HandSetAPIStart()) && tries < 3)
+            if(!(bool)ExecuteSync(() => HandSetAPIStart()))
             {
-                tries++;
-                Thread.Sleep(1500);
+                throw new Exception("Unable to initialize Remedi SDK");
             }
-            if (tries == 3) return;
             _logger?.Debug("Remedi", ((ulong)ExecuteSync(() => GetHandSetAPIVersion())).ToString("X"));
             ExecuteSync(() => SwitchRINGTONEMode(Ringtone0));
             ExecuteSync(() => DisableRing(On));
