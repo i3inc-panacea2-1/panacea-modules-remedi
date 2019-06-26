@@ -207,7 +207,6 @@ namespace Panacea.Modules.Remedi
             ExecuteSync(() => DisableBarCodeScan(On));
             _logger?.Debug("Remedi", "Handset API started");
             _ScannerTimer.Start();
-            _microphoneTimer.Start();
             System.Windows.Application.Current.Exit += (oo, ee) =>
             {
                 _stop = true;

@@ -15,6 +15,11 @@ namespace Panacea.Modules.Remedi
         static readonly object _lock = new object();
         private readonly PanaceaServices _core;
 
+        [PanaceaInject("RemediHandsetSpeakerVolume", "Sets the audio volume level on Remedi handsets. (0-66)", "RemediHandsetSpeakerVolume=60")]
+        protected byte handsetVolume;
+        [PanaceaInject("RemediHandsetMicVolume", "Sets the microphone volume level on Remedi handsets. (0-61)", "RemediHandsetMicVolume=50")]
+        protected byte microphoneVolume;
+
         public RemediPlugin(PanaceaServices core)
         {
             _core = core;
