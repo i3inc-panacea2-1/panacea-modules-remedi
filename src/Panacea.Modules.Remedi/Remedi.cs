@@ -82,8 +82,10 @@ namespace Panacea.Modules.Remedi
         private Timer _ScannerTimer;
         private Timer _microphoneTimer;
 
-        internal Remedi(ILogger logger)
+        internal Remedi(byte handsetSpeakerVolume, byte handsetMicVolume, ILogger logger)
         {
+            HandsetVolume = handsetSpeakerVolume;
+            MicrophoneVolume = handsetMicVolume;
             _logger = logger;
             _ScannerTimer = new Timer(30000);
             _ScannerTimer.Elapsed += _ScannerTimer_Elapsed;
@@ -190,7 +192,7 @@ namespace Panacea.Modules.Remedi
 
             if(!(bool)ExecuteSync(() => HandSetAPIStart()))
             {
-                throw new Exception("Unable to initialize Remedi SDK");
+                _logger.Error(this, "Unable to initialize Remedi SDK");
             }
             _logger?.Debug("Remedi", ((ulong)ExecuteSync(() => GetHandSetAPIVersion())).ToString("X"));
             ExecuteSync(() => SwitchRINGTONEMode(Ringtone0));

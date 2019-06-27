@@ -48,7 +48,7 @@ namespace Panacea.Modules.Remedi
                 {
                     if (_manager == null)
                     {
-                        _manager = new Remedi(_core.Logger);
+                        _manager = new Remedi(HandsetVolume, MicrophoneVolume,  _core.Logger);
                         _manager.Start();
                     }
                 }
