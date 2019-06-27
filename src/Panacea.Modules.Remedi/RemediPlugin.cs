@@ -16,9 +16,9 @@ namespace Panacea.Modules.Remedi
         private readonly PanaceaServices _core;
 
         [PanaceaInject("RemediHandsetSpeakerVolume", "Sets the audio volume level on Remedi handsets. (0-66)", "RemediHandsetSpeakerVolume=60")]
-        protected byte handsetVolume;
+        protected byte HandsetVolume { get; set; }
         [PanaceaInject("RemediHandsetMicVolume", "Sets the microphone volume level on Remedi handsets. (0-61)", "RemediHandsetMicVolume=50")]
-        protected byte microphoneVolume;
+        protected byte MicrophoneVolume { get; set; }
 
         public RemediPlugin(PanaceaServices core)
         {
@@ -32,7 +32,7 @@ namespace Panacea.Modules.Remedi
 
         public void Dispose()
         {
-            
+
         }
 
         public Task EndInit()
@@ -42,11 +42,11 @@ namespace Panacea.Modules.Remedi
 
         public IHardwareManager GetHardwareManager()
         {
-            if(_manager == null)
+            if (_manager == null)
             {
                 lock (_lock)
                 {
-                    if(_manager == null)
+                    if (_manager == null)
                     {
                         _manager = new Remedi(_core.Logger);
                         _manager.Start();
