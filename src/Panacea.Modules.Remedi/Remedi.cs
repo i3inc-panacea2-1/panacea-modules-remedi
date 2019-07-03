@@ -193,6 +193,7 @@ namespace Panacea.Modules.Remedi
             if(!(bool)ExecuteSync(() => HandSetAPIStart()))
             {
                 _logger.Error(this, "Unable to initialize Remedi SDK");
+                return;
             }
             _logger?.Debug("Remedi", ((ulong)ExecuteSync(() => GetHandSetAPIVersion())).ToString("X"));
             ExecuteSync(() => SwitchRINGTONEMode(Ringtone0));
